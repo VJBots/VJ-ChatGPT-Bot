@@ -3,7 +3,7 @@
 
 
 
-## How To Make Your Own [Video Tutorial](https://youtu.be/qp3Jvzw2jnY)
+## How To Make Your Own [Video Tutorial](https://youtube.com/@Tech_VJ)
 
 ## Update Channel [VJ Botz](https://telegram.me/vj_botz)
 
