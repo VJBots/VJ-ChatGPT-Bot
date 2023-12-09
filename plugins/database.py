@@ -1,8 +1,8 @@
 import motor.motor_asyncio
+from config import *
 
-DATABASE_NAME = "chatgptbot"
-DATABASE_URI = "mongodb+srv://pewam92589:zZ9qyzbpNOfGsoyp@cluster0.lg5ayam.mongodb.net/?retryWrites=true&w=majority"
-
+DATABASE_NAME = DB_NAME
+DATABASE_URI = DB_URI
 class Database:
     
     def __init__(self, uri, database_name):
