@@ -3,3 +3,9 @@ Tgcrypto
 asyncio
 motor
 openai==0.27.0
+aiohttp
+Flask==1.1.2
+gunicorn==20.1.0
+Jinja2==3.0.3
+werkzeug==2.0.2
+itsdangerous==2.0.1
