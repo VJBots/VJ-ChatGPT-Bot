@@ -1,6 +1,7 @@
 from pyrogram.errors import InputUserDeactivated, UserNotParticipant, FloodWait, UserIsBlocked, PeerIdInvalid
 from plugins.database import db
 from pyrogram import Client, filters
+from config import ADMINS
 import asyncio
 import datetime
 import time
@@ -8,8 +9,6 @@ import logging
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
-
-ADMINS = 6168162777
 
 async def broadcast_messages(user_id, message):
     try:
