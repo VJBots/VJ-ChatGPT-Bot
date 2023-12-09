@@ -3,7 +3,15 @@ from config import *
 import openai
 import asyncio
 
+
+LOG = LOG_CHANNEL
 openai.api_key = OPENAI_API
+
+async def send_message_in_chunks(client, chat_id, text):
+    max_length = 4096  # Maximum length of a message
+    for i in range(0, len(text), max_length):
+        await client.send_message(chat_id, text[i:i+max_length])
+
 
 @Client.on_message(filters.private & filters.text & ~filters.command(['start']))
 async def ai_answer(client, message):
@@ -26,7 +34,9 @@ async def ai_answer(client, message):
                 footer_credit = "<b><a href='https://t.me/vj_bot_disscussion'>• ʀᴇᴘᴏʀᴛ ɪꜱꜱᴜᴇ •</a>══<a href='https://t.me/kingvj01'>• ᴄᴏɴᴛᴀᴄᴛ ᴍᴀꜱᴛᴇʀ •</a></b>"
                 ai_response = response.choices[0].message.content.strip()
                 await msg.delete()
-                await message.reply_texg(f"**ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴀɴsᴡᴇʀ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ǫᴜᴇʀʏ** 👇\n\n{ai_response}\n\n\n{footer_credit}")
+                await send_message_in_chunks(client, message.chat.id, f"**ʜᴇʀᴇ ɪs ʏᴏᴜʀ ᴀɴsᴡᴇʀ ʀᴇʟᴀᴛᴇᴅ ᴛᴏ ʏᴏᴜʀ ǫᴜᴇʀʏ** 👇\n\n{ai_response}\n\n{footer_credit}")
+                await send_message_in_chunks(client, LOGS, f"**⭕ ᴀ ᴜsᴇʀ ɴᴀᴍᴇᴅ:** {message.from_user.mention} **ᴡɪᴛʜ ᴜsᴇʀ ɪᴅ -** {user_id}.\n🔍 **ᴀsᴋᴇᴅ ᴍᴇ ᴛʜɪs ǫᴜᴇʀʏ...**👇\n\n🔻 **ǫᴜᴇʀʏ:** `{users_message}`\n\n🔻 **ʜᴇʀᴇ ɪs ᴀɴsᴡᴇʀ ɪ ʀᴇsᴘᴏɴᴅᴇᴅ:**\n🖍️ {ai_response}\n\n\n🔻 **ᴜsᴇʀ ɪᴅ :-** {user_id} \n🔻 **ᴜsᴇʀ ɴᴀᴍᴇ :-** {message.from_user.mention}")
+                
             except Exception as error:
                 print(error)
                 await message.reply_text(f"**An error occurred:**\n\n**{error}**\n\n**Forward This Message To @KingVJ01**")
