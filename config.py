@@ -10,7 +10,7 @@ def is_enabled(value, default):
     else:
         return default
 
-API_ID = int(environ.get("API_ID", ""))
+API_ID = int(environ.get("API_ID", "14350423"))
 API_HASH = environ.get("API_HASH", "")
 BOT_TOKEN = environ.get("BOT_TOKEN", "")
 LOG_CHANNEL = int(environ.get("LOG_CHANNEL", ""))
